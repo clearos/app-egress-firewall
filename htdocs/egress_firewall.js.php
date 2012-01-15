@@ -39,6 +39,8 @@ require_once $bootstrap . '/bootstrap.php';
 clearos_load_language('egress_firewall');
 clearos_load_language('base');
 
+// TODO: Merge dialog into theme
+
 header('Content-Type: application/x-javascript');
 
 echo "
