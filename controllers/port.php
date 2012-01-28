@@ -152,7 +152,7 @@ class Port extends ClearOS_Controller
             }
         }
 
-        // FIXME: trim services list for rules that are already enabled
+        // TODO: trim services list for rules that are already enabled
         $data['services'] = $this->egress->get_standard_service_list();
         $data['protocols'] = $this->egress->get_protocols();
         // Only want TCP and UDP
