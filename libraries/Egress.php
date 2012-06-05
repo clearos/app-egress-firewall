@@ -544,7 +544,6 @@ class Egress extends Firewall
             $hostinfo['name'] = $rule->get_name();
             $hostinfo['enabled'] = $rule->is_enabled();
             $hostinfo['host'] = $rule->get_address();
-            $hostinfo['metainfo'] = $metadata->lookup_hostname_metainfo($hostinfo[host]);
 
             $hosts[] = $hostinfo;
         }
