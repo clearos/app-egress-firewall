@@ -110,15 +110,18 @@ foreach ($ranges as $rule) {
     $items[] = $item;
 }
 
+sort($items);
+
 ///////////////////////////////////////////////////////////////////////////////
 // Summary table
 ///////////////////////////////////////////////////////////////////////////////
 
-sort($items);
+$options['default_rows'] = 25;
 
 echo summary_table(
     lang('egress_firewall_destination_ports'),
     $anchors,
     $headers,
-    $items
+    $items,
+    $options
 );
