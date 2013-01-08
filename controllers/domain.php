@@ -126,9 +126,11 @@ class Domain extends ClearOS_Controller
 
     function delete($host)
     {
+        $host_item = preg_replace('/_/', '/', $host);
+
         $confirm_uri = '/app/egress_firewall/domain/destroy/' . $host;
         $cancel_uri = '/app/egress_firewall';
-        $items = array($host);
+        $items = array($host_item);
 
         $this->page->view_confirm_delete($confirm_uri, $cancel_uri, $items);
     }
@@ -146,7 +148,7 @@ class Domain extends ClearOS_Controller
         try {
             $this->load->library('egress_firewall/Egress');
 
-            $this->egress->delete_exception_destination($host);
+            $this->egress->delete_exception_destination(preg_replace('/_/', '/', $host));
 
             $this->page->set_status_deleted();
             redirect('/egress_firewall');
@@ -167,9 +169,10 @@ class Domain extends ClearOS_Controller
     function disable($host)
     {
         try {
+
             $this->load->library('egress_firewall/Egress');
 
-            $this->egress->toggle_enable_exception_destination(FALSE, $host);
+            $this->egress->toggle_enable_exception_destination(FALSE, preg_replace('/_/', '/', $host));
 
             $this->page->set_status_disabled();
             redirect('/egress_firewall');
@@ -192,7 +195,7 @@ class Domain extends ClearOS_Controller
         try {
             $this->load->library('egress_firewall/Egress');
 
-            $this->egress->toggle_enable_exception_destination(TRUE, $host);
+            $this->egress->toggle_enable_exception_destination(TRUE, preg_replace('/_/', '/', $host));
 
             $this->page->set_status_enabled();
             redirect('/egress_firewall');
