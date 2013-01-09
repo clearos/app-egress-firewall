@@ -1,7 +1,7 @@
 
 Name: app-egress-firewall
 Epoch: 1
-Version: 1.1.1
+Version: 1.4.14
 Release: 1%{dist}
 Summary: Egress Firewall
 License: GPLv3
