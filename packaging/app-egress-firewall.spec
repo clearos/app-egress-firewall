@@ -1,7 +1,7 @@
 
 Name: app-egress-firewall
 Epoch: 1
-Version: 1.4.20
+Version: 1.4.21
 Release: 1%{dist}
 Summary: Egress Firewall
 License: GPLv3
@@ -16,7 +16,7 @@ Requires: app-network
 The Egress Firewall app allows you to block certain kinds of traffic from leaving your network.
 
 %package core
-Summary: Egress Firewall - Core
+Summary: Egress Firewall - APIs and install
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core

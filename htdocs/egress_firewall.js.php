@@ -68,7 +68,7 @@ $(document).ready(function() {
     );
 
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         dataType: 'json',
         url: '/app/egress_firewall/ajax/get_egress_state',
         data: '',
