@@ -4,9 +4,9 @@
 /**
  * Egress Firewall mode.
  *
- * @category   Apps
- * @package    Egress
- * @subpackage Views
+ * @category   apps
+ * @package    egress-firewall
+ * @subpackage views
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later

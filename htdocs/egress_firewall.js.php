@@ -3,9 +3,9 @@
 /**
  * Javascript helper for Egress Firewall.
  *
- * @category   Apps
- * @package    Egress_Firewall
- * @subpackage Javascript
+ * @category   apps
+ * @package    egress-firewall
+ * @subpackage javascript
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
