@@ -61,6 +61,7 @@ foreach ($hosts as $rule) {
     $state_anchor = 'anchor_' . $state;
 
     $item['title'] = $rule['name'];
+    $item['current_state'] = (bool)$rule['enabled'];
     $item['action'] = '/app/egress_firewall/domain/delete/' . $key;
     $item['anchors'] = button_set(
         array(
@@ -82,7 +83,10 @@ sort($items);
 // Summary table
 ///////////////////////////////////////////////////////////////////////////////
 
-$options['default_rows'] = 25;
+$options = array (
+    'default_rows' => 25,
+    'row-enable-disable' => TRUE
+);
 
 echo summary_table(
     lang('egress_firewall_destination_domains'),
