@@ -1,7 +1,7 @@
 
 Name: app-egress-firewall
 Epoch: 1
-Version: 1.4.22
+Version: 1.4.23
 Release: 1%{dist}
 Summary: Egress Firewall
 License: GPLv3
@@ -20,7 +20,7 @@ Summary: Egress Firewall - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
-Requires: app-firewall-core >= 1:1.4.15
+Requires: app-firewall-core >= 1:1.5.19
 Requires: app-network-core
 
 %description core
@@ -73,7 +73,6 @@ exit 0
 %files core
 %defattr(-,root,root)
 %exclude /usr/clearos/apps/egress_firewall/packaging
-%exclude /usr/clearos/apps/egress_firewall/tests
 %dir /usr/clearos/apps/egress_firewall
 /usr/clearos/apps/egress_firewall/deploy
 /usr/clearos/apps/egress_firewall/language

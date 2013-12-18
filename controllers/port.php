@@ -37,6 +37,7 @@
 //--------
 
 use \clearos\apps\egress_firewall\Egress as Egress;
+use \clearos\apps\network\Network as Network;
 
 ///////////////////////////////////////////////////////////////////////////////
 // C L A S S
@@ -76,6 +77,8 @@ class Port extends ClearOS_Controller
         try {
             $data['ports'] = $this->egress->get_exception_ports();
             $data['ranges'] = $this->egress->get_exception_port_ranges();
+            $data['network_mode'] = $this->network->get_mode();
+            $data['panic'] = $this->egress->is_panic();
         } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
