@@ -47,13 +47,6 @@ echo "
 
 $(document).ready(function() {
 
-    if ($(location).attr('href').match('.*mode$') != null) {
-        $('#state').css('width', '240');
-    } else if ($(location).attr('href').match('.*\/port\/.*$') != null) {
-        $('#port').css('width', '50');
-        $('#range_from').css('width', '50');
-        $('#range_to').css('width', '50');
-    }
     $('tbody', $('#sidebar_summary_table')).append(
       '<tr>' +
       '  <td><b>" . lang('egress_firewall_mode') . "</b></td>' +
