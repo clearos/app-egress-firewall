@@ -26,6 +26,9 @@ $app['subcategory'] = lang('base_subcategory_firewall');
 /////////////////////////////////////////////////////////////////////////////
 
 $app['controllers']['egress_firewall']['title'] = lang('egress_firewall_app_name');
+$app['controllers']['domain']['title'] = lang('egress_firewall_destination_domains');
+$app['controllers']['mode']['title'] = lang('base_mode');
+$app['controllers']['port']['title'] = lang('egress_firewall_destination_ports');
 
 /////////////////////////////////////////////////////////////////////////////
 // Packaging

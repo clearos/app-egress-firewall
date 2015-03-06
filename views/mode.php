@@ -38,27 +38,27 @@ $this->lang->load('base');
 $this->lang->load('egress_firewall');
 
 ///////////////////////////////////////////////////////////////////////////////
-// Form open
+// Form
 ///////////////////////////////////////////////////////////////////////////////
+
+if ($form_type === 'edit') {
+    $read_only = FALSE;
+    $buttons = array(
+        form_submit_update('submit'),
+        anchor_cancel('/app/egress_firewall')
+    );
+} else {
+    $read_only = TRUE;
+    $buttons = array(
+        anchor_edit('/app/egress_firewall/mode/edit')
+    );
+}
 
 echo form_open('egress_firewall/mode', array('autocomplete' => 'off'));
 echo form_header(lang('egress_firewall_mode'));
 
-///////////////////////////////////////////////////////////////////////////////
-// Form fields and buttons
-///////////////////////////////////////////////////////////////////////////////
-
-$buttons = array(
-    form_submit_update('submit'),
-    anchor_cancel('/app/egress_firewall')
-);
-
 echo field_dropdown('state', $state_options, $state, lang('egress_firewall_mode'), $read_only);
 echo field_button_set($buttons);
-
-///////////////////////////////////////////////////////////////////////////////
-// Form close
-///////////////////////////////////////////////////////////////////////////////
 
 echo form_footer();
 echo form_close();
