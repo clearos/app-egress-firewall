@@ -152,6 +152,7 @@ class Port extends ClearOS_Controller
                 redirect('/egress_firewall');
             } catch (Exception $e) {
                 $this->page->set_message(clearos_exception_message($e));
+                redirect('/egress_firewall');
             }
         }
 

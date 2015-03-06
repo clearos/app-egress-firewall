@@ -263,10 +263,11 @@ class Egress extends Firewall
 
         $ports = $this->_get_ports_list();
 
+        // TODO: add support for below
         if ($service == "PPTP") {
-            throw new Engine_Exception("TODO: No support for blocking outgoing PPTP traffic", COMMON_WARNING);
+            throw new Engine_Exception("No support for blocking outgoing PPTP traffic", COMMON_WARNING);
         } else if ($service == "IPsec") {
-            throw new Engine_Exception("TODO: No support for blocking outgoing IPsec traffic", COMMON_WARNING);
+            throw new Engine_Exception("No support for blocking outgoing IPsec traffic", COMMON_WARNING);
         } else {
             Validation_Exception::is_valid($this->validate_service($service));
 
