@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Egress firewall controller.
+ * Egress firewall add (port) rule view.
  *
  * @category   apps
  * @package    egress-firewall
- * @subpackage controllers
+ * @subpackage views
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011-2015 ClearFoundation
+ * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/egress_firewall/
  */
@@ -25,46 +25,34 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.  
+//  
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-// C L A S S
+// Load dependencies
 ///////////////////////////////////////////////////////////////////////////////
 
-/**
- * Egress firewall controller.
- *
- * @category   apps
- * @package    egress-firewall
- * @subpackage controllers
- * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011-2015 ClearFoundation
- * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
- * @link       http://www.clearfoundation.com/docs/developer/apps/egress_firewall/
- */
+$this->lang->load('base');
+$this->lang->load('firewall');
 
-class Egress_Firewall extends ClearOS_Controller
-{
-    /**
-     * Firewall (egress) overview.
-     *
-     * @return view
-     */
+///////////////////////////////////////////////////////////////////////////////
+// Port
+///////////////////////////////////////////////////////////////////////////////
 
-    function index()
-    {
-        // Load libraries
-        //---------------
+echo form_open('egress_firewall/port');
+echo form_header(lang('firewall_port'));
 
-        $this->lang->load('egress_firewall');
+echo field_input('port_nickname', $port_nickname, lang('firewall_nickname'));
+echo field_simple_dropdown('port_protocol', $protocols, $port_protocol, lang('firewall_protocol'));
+echo field_input('port', $port, lang('firewall_port'));
 
-        // Load views
-        //-----------
+echo field_button_set(
+    array(
+        form_submit_add('submit_port', 'high'),
+        anchor_cancel('/app/egress_firewall')
+    )
+);
 
-        $views = array('egress_firewall/mode', 'egress_firewall/ports', 'egress_firewall/domain');
-
-        $this->page->view_forms($views, lang('egress_firewall_app_name'));
-    }
-}
+echo form_footer();
+echo form_close();

@@ -64,7 +64,14 @@ $headers = array(
 // Anchors 
 ///////////////////////////////////////////////////////////////////////////////
 
-$anchors = array(anchor_add('/app/egress_firewall/port/add'));
+$anchors = anchor_multi(
+    array (
+        'egress_firewall/service' => lang('base_add_by') . ': ' . lang('firewall_service'),
+        'egress_firewall/port' => lang('base_add_by') . ': ' . lang('firewall_port'),
+        'egress_firewall/port_range' => lang('base_add_by') . ': ' . lang('firewall_port_range')
+    ),
+    lang('base_add')
+);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Ports
@@ -77,11 +84,11 @@ foreach ($ports as $rule) {
 
     $item['title'] = $rule['name'];
     $item['current_state'] = (bool)$rule['enabled'];
-    $item['action'] = '/app/egress_firewall/port/delete/' . $key;
+    $item['action'] = '/app/egress_firewall/ports/delete/' . $key;
     $item['anchors'] = button_set(
         array(
-            $state_anchor('/app/egress_firewall/port/' . $state . '/' . $key, 'high'),
-            anchor_delete('/app/egress_firewall/port/delete/' . $key, 'low')
+            $state_anchor('/app/egress_firewall/ports/' . $state . '/' . $key, 'high'),
+            anchor_delete('/app/egress_firewall/ports/delete/' . $key, 'low')
         )
     );
     $item['details'] = array(
@@ -105,11 +112,11 @@ foreach ($ranges as $rule) {
 
     $item['title'] = $rule['name'];
     $item['current_state'] = (bool)$rule['enabled'];
-    $item['action'] = '/app/egress_firewall/port/delete_range/' . $key;
+    $item['action'] = '/app/egress_firewall/ports/delete_range/' . $key;
     $item['anchors'] = button_set(
         array(
-            $state_anchor('/app/egress_firewall/port/' . $state . '_range/' . $key, 'high'),
-            anchor_delete('/app/egress_firewall/port/delete_range/' . $key, 'low')
+            $state_anchor('/app/egress_firewall/ports/' . $state . '_range/' . $key, 'high'),
+            anchor_delete('/app/egress_firewall/ports/delete_range/' . $key, 'low')
         )
     );
     $item['details'] = array(

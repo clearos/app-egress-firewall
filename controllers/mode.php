@@ -92,7 +92,7 @@ class Mode extends ClearOS_Controller
             try {
                 $this->egress->set_egress_state($this->input->post('state'));
                 $this->page->set_status_updated();
-                redirect('/egress_firewall/mode');
+                redirect('/egress_firewall');
             } catch (Exception $e) {
                 $this->page->view_exception($e);
                 return;

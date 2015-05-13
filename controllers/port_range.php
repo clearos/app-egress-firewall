@@ -7,7 +7,7 @@
  * @package    egress-firewall
  * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011 ClearFoundation
+ * @copyright  2011-2015 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/egress_firewall/
  */
@@ -50,12 +50,12 @@ use \clearos\apps\network\Network as Network;
  * @package    egress-firewall
  * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011 ClearFoundation
+ * @copyright  2011-2015 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/egress_firewall/
  */
 
-class Port extends ClearOS_Controller
+class Port_Range extends ClearOS_Controller
 {
     /**
      * Egress port overview.
@@ -72,26 +72,31 @@ class Port extends ClearOS_Controller
         $this->load->library('network/Network');
         $this->lang->load('egress_firewall');
 
-        $this->form_validation->set_policy('port_nickname', 'egress_firewall/Egress', 'validate_name', TRUE);
-        $this->form_validation->set_policy('port_protocol', 'egress_firewall/Egress', 'validate_protocol', TRUE);
-        $this->form_validation->set_policy('port', 'egress_firewall/Egress', 'validate_port', TRUE);
+        // Set validation rules
+        //---------------------
+
+        $this->form_validation->set_policy('range_nickname', 'egress_firewall/Egress', 'validate_name', TRUE);
+        $this->form_validation->set_policy('range_protocol', 'egress_firewall/Egress', 'validate_protocol', TRUE);
+        $this->form_validation->set_policy('range_from', 'egress_firewall/Egress', 'validate_port', TRUE);
+        $this->form_validation->set_policy('range_to', 'egress_firewall/Egress', 'validate_port', TRUE);
 
         // Handle form submit
         //-------------------
 
         if ($this->form_validation->run()) {
             try {
-                $this->egress->add_exception_port(
-                    $this->input->post('port_nickname'),
-                    $this->input->post('port_protocol'),
-                    $this->input->post('port')
+                $this->egress->add_exception_port_range(
+                    $this->input->post('range_nickname'),
+                    $this->input->post('range_protocol'),
+                    $this->input->post('range_from'),
+                    $this->input->post('range_to')
                 );
 
                 $this->page->set_status_added();
                 redirect('/egress_firewall');
             } catch (Exception $e) {
                 $this->page->set_message(clearos_exception_message($e));
-                redirect('/egress_firewall/port');
+                redirect('/egress_firewall/port_range');
             }
         }
 
@@ -105,6 +110,6 @@ class Port extends ClearOS_Controller
         // Load the views
         //---------------
 
-        $this->page->view_form('egress_firewall/port/port', $data, lang('base_add'));
+        $this->page->view_form('egress_firewall/port/port_range', $data, lang('base_add'));
     }
 }

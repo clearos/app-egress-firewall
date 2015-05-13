@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Egress firewall controller.
+ * Egress firewall add service rule view.
  *
  * @category   apps
  * @package    egress-firewall
- * @subpackage controllers
+ * @subpackage views
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2011-2015 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
@@ -25,46 +25,32 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.  
+//  
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-// C L A S S
+// Load dependencies
 ///////////////////////////////////////////////////////////////////////////////
 
-/**
- * Egress firewall controller.
- *
- * @category   apps
- * @package    egress-firewall
- * @subpackage controllers
- * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011-2015 ClearFoundation
- * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
- * @link       http://www.clearfoundation.com/docs/developer/apps/egress_firewall/
- */
+$this->lang->load('base');
+$this->lang->load('firewall');
 
-class Egress_Firewall extends ClearOS_Controller
-{
-    /**
-     * Firewall (egress) overview.
-     *
-     * @return view
-     */
+///////////////////////////////////////////////////////////////////////////////
+// Standard service
+///////////////////////////////////////////////////////////////////////////////
 
-    function index()
-    {
-        // Load libraries
-        //---------------
+echo form_open('egress_firewall/service');
+echo form_header(lang('firewall_standard_service'));
 
-        $this->lang->load('egress_firewall');
+echo field_simple_dropdown('service', $services, $service, lang('firewall_service'));
 
-        // Load views
-        //-----------
+echo field_button_set(
+    array(
+        form_submit_add('submit_standard', 'high'),
+        anchor_cancel('/app/egress_firewall')
+    )
+);
 
-        $views = array('egress_firewall/mode', 'egress_firewall/ports', 'egress_firewall/domain');
-
-        $this->page->view_forms($views, lang('egress_firewall_app_name'));
-    }
-}
+echo form_footer();
+echo form_close();

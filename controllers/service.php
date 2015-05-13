@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Firewall egress port controller.
+ * Firewall egress service controller.
  *
  * @category   apps
  * @package    egress-firewall
  * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011 ClearFoundation
+ * @copyright  2011-2015 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/egress_firewall/
  */
@@ -44,21 +44,21 @@ use \clearos\apps\network\Network as Network;
 ///////////////////////////////////////////////////////////////////////////////
 
 /**
- * Firewall egress port controller.
+ * Firewall egress service controller.
  *
  * @category   apps
  * @package    egress-firewall
  * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011 ClearFoundation
+ * @copyright  2011-2015 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/egress_firewall/
  */
 
-class Port extends ClearOS_Controller
+class Service extends ClearOS_Controller
 {
     /**
-     * Egress port overview.
+     * Egress service overview.
      *
      * @return view
      */
@@ -72,39 +72,32 @@ class Port extends ClearOS_Controller
         $this->load->library('network/Network');
         $this->lang->load('egress_firewall');
 
-        $this->form_validation->set_policy('port_nickname', 'egress_firewall/Egress', 'validate_name', TRUE);
-        $this->form_validation->set_policy('port_protocol', 'egress_firewall/Egress', 'validate_protocol', TRUE);
-        $this->form_validation->set_policy('port', 'egress_firewall/Egress', 'validate_port', TRUE);
+        // Set validation rules
+        //---------------------
+
+        $this->form_validation->set_policy('service', 'egress_firewall/Egress', 'validate_service', TRUE);
 
         // Handle form submit
         //-------------------
 
         if ($this->form_validation->run()) {
             try {
-                $this->egress->add_exception_port(
-                    $this->input->post('port_nickname'),
-                    $this->input->post('port_protocol'),
-                    $this->input->post('port')
-                );
+                $this->egress->add_exception_standard_service($this->input->post('service'));
 
                 $this->page->set_status_added();
                 redirect('/egress_firewall');
             } catch (Exception $e) {
                 $this->page->set_message(clearos_exception_message($e));
-                redirect('/egress_firewall/port');
+                redirect('/egress_firewall/service');
             }
         }
 
-        $data['protocols'] = $this->egress->get_protocols();
-        // Only want TCP and UDP
-        foreach ($data['protocols'] as $key => $protocol) {
-            if ($key != Egress::PROTOCOL_TCP && $key != Egress::PROTOCOL_UDP)
-                unset($data['protocols'][$key]);
-        }
+        // TODO: trim services list for rules that are already enabled
+        $data['services'] = $this->egress->get_standard_service_list();
             
         // Load the views
         //---------------
 
-        $this->page->view_form('egress_firewall/port/port', $data, lang('base_add'));
+        $this->page->view_form('egress_firewall/port/service', $data, lang('base_add'));
     }
 }

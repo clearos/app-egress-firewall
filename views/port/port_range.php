@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Egress firewall add (port) rule view.
+ * Egress firewall add (port range) rule view.
  *
  * @category   apps
  * @package    egress-firewall
  * @subpackage views
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011 ClearFoundation
+ * @copyright  2011-2015 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/egress_firewall/
  */
@@ -37,50 +37,10 @@ $this->lang->load('base');
 $this->lang->load('firewall');
 
 ///////////////////////////////////////////////////////////////////////////////
-// Standard service
-///////////////////////////////////////////////////////////////////////////////
-
-echo form_open('egress_firewall/port/add');
-echo form_header(lang('firewall_standard_service'));
-
-echo field_simple_dropdown('service', $services, $service, lang('firewall_service'));
-
-echo field_button_set(
-    array(
-        form_submit_add('submit_standard', 'high'),
-        anchor_cancel('/app/egress_firewall')
-    )
-);
-
-echo form_footer();
-echo form_close();
-
-///////////////////////////////////////////////////////////////////////////////
-// Port
-///////////////////////////////////////////////////////////////////////////////
-
-echo form_open('egress_firewall/port/add');
-echo form_header(lang('firewall_port'));
-
-echo field_input('port_nickname', $port_nickname, lang('firewall_nickname'));
-echo field_simple_dropdown('port_protocol', $protocols, $port_protocol, lang('firewall_protocol'));
-echo field_input('port', $port, lang('firewall_port'));
-
-echo field_button_set(
-    array(
-        form_submit_add('submit_port', 'high'),
-        anchor_cancel('/app/egress_firewall')
-    )
-);
-
-echo form_footer();
-echo form_close();
-
-///////////////////////////////////////////////////////////////////////////////
 // Port range
 ///////////////////////////////////////////////////////////////////////////////
 
-echo form_open('egress_firewall/port/add');
+echo form_open('egress_firewall/port_range');
 echo form_header(lang('firewall_port_range'));
 
 echo field_input('range_nickname', $range_nickname, lang('firewall_nickname'));
@@ -97,4 +57,3 @@ echo field_button_set(
 
 echo form_footer();
 echo form_close();
-
