@@ -1,0 +1,4 @@
+#!/bin/sh
+
+logger -p local6.notice -t installer "app-egress-firewall-core - removing Egress Firewall rules on un-install"
+/usr/clearos/apps/egress_firewall/deploy/remove-egress-rules
